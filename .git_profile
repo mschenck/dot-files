@@ -1,0 +1,227 @@
+# Add this to .profile or .bash_profile
+#
+# Or the cool way:
+# cd ~/ && git clone git://gist.github.com/114160.git .githelper && echo "# Add me to your .profile or .bash_profile.  Save the file, open a new terminal, and you'll have all of this." && echo "" && echo "source ~/.githelper/gistfile1.sh"
+#
+# - When inside a git working directory, modifies prompt to be (git)$wd[$branch]/
+# - Adds a number of short hand aliases, ie pull instead of git pull, k instead of gitk
+# - Adds one command calls for making new branches, deleting branches
+# - Adds one command call for freebasing (fetch and rebase)
+# - And a few other nuggets
+#
+# Modified from http://pastie.org/230805
+# See also http://www.simplisticcomplexity.com/2008/03/13/show-your-git-branch-name-in-your-prompt/
+_bold=$(tput bold)
+_normal=$(tput sgr0)
+
+## Freebase
+# Fetch and rebase the current branch
+function __freebase {
+    echo "Freebasing branch: $1";
+    echo "Fetching latest updates.";
+    echo "--------------";
+    git fetch;
+    echo "Rebasing changes....";
+    echo "--------------";
+    git rebase remotes/origin/$1;
+    echo "--------------";
+    echo "Freebase Complete";
+}
+
+function __push {
+    echo "Pushing to remote branch: $1";
+    git push origin $1;
+    echo "Push Complete";
+}
+
+## Make branch
+function __makeBranch {
+    if [ $# != 2 ]; then
+        echo "Name for new Branch: "
+        read NEWBRANCHNAME
+    else
+        NEWBRANCHNAME=$2
+    fi
+    echo "Creating new branch $NEWBRANCHNAME from current branch $1";
+    echo "---------------";
+    echo "Making sure you re all up to date first";
+    echo "---------------";
+    __freebase $1
+    echo "Creating new branch";
+    git checkout -b $NEWBRANCHNAME;
+    echo "Finished creating new branch $NEWBRANCHNAME";
+}
+## Delete a Branch
+function __deleteBranch {
+    if [ $# != 2 ]; then
+        echo "Branch to Delete:"
+        read BRANCHNAME
+    else
+        BRANCHNAME=$2
+    fi
+
+    if [ "$BRANCHNAME" = "master" ]; then
+        echo "You shouldnt be deleting master."
+        echo "If you really want to, then you know what youre doing and you should just be using the real command.";
+        exit 1;
+    fi
+    if [ "$BRANCHNAME" = "$1" ]; then
+        echo "You cannot delete this branch while you have it checked out.";
+        echo -n "Do you want to checkout master so you can delete $BRANCHNAME? (y or n) :";
+        read C
+        if [ "$C" = "y" ]; then
+            git checkout master;
+        else
+            echo "You should have listened!";
+            exit 1;
+        fi
+    fi
+    echo -n "Are you sure you want to delete the branch $BRANCHNAME (y or n) :"
+    read CONFIRM
+    if [ "$CONFIRM" = "y" ]; then
+        echo "Deleting branch $BRANCHNAME";
+        # Delete remotes as well?
+        git branch -d $BRANCHNAME;
+        echo "$BRANCHNAME has been deleted";
+    fi
+}
+
+function __add {
+    if [ $# = 0 ]; then
+        echo "usage: add [minutes] (add all untracked files modified in the last minute)";
+        echo "usage: add [minutes] c (add all untracked files modified in the last minute) and commit all";
+        echo "usage: add [paths]";
+        exit 1;
+    fi
+
+    REGEX='^[0-9]+$';
+    if [[ ${1} =~ ${REGEX} ]]; then
+        python ~/git_add_recent.py $1;
+        if [ $2 = "c" ]; then
+            echo "Committing...";
+            git commit -a;
+        fi;
+    else
+        git add $@;
+    fi;
+}
+
+__vcs_dir() {
+    local vcs base_dir sub_dir ref
+    git_dir() {
+        base_dir=$(git rev-parse --show-cdup 2>/dev/null) || return 1
+        if [ -n "$base_dir" ]; then
+            base_dir=`cd $base_dir; pwd`
+        else
+            base_dir=$PWD
+        fi
+        sub_dir=$(git rev-parse --show-prefix)
+        sub_dir="/${sub_dir%/}"
+        ref=$(git symbolic-ref -q HEAD || git name-rev --name-only HEAD 2>/dev/null)
+        ref=${ref#refs/heads/}
+        vcs="git"
+        base_dir="$(basename "${base_dir}")"
+
+        alias pull="__freebase $ref";
+        alias commit="git commit";
+        alias save="git commit";
+
+        alias push="__push $ref"
+        alias revert="git checkout"
+        alias checkout="git checkout"
+        alias status="git status"
+        alias diff="git diff"
+        alias s="git status";
+        alias d="git diff";
+        alias a="__add";
+        alias c="git commit -a";
+        alias p="__push $ref"
+        alias fp="__freebase $ref && __push $ref";
+
+        alias whatamipushing="gitk $ref &";
+        alias remotediff="echo $ref && git fetch && git diff HEAD..origin/$ref";
+
+        # Freebase the current branch, aka never try and rebase on the wrong branch again
+        # usage: freebase
+        alias freebase="__freebase $ref";
+        alias f="__freebase $ref";
+        alias update="git stash;__freebase $ref;git stash apply;";
+
+
+        # Name of current branch
+        alias branch="echo Currently on Branch: $ref";
+
+        # Create a new branch
+        # usage: newbranch Awesomeness
+        # usage: newbranch (will prompt for new branch name)
+        alias newbranch="__makeBranch $ref";
+
+        # Delete a branch
+        # If you try and delete the branch you currently have checked out,
+        # Will warn and prompt to checkout master, instead of just dying.
+        # usage: deletebranch Awesomeness
+        # usage: deletebranch (will prompt for branch name to delete)
+        alias deletebranch="__deleteBranch $ref";
+
+        # List all local branches
+        alias list="echo All Local Branches; git branch;";
+
+        # List all local and remote branches
+        alias listall="echo All Local and Remote Branches; git branch -a;";
+
+        # Gitk with last 100 changes on all branches
+        alias k="gitk --max-count=100 --all &";
+
+        # Gitk with all changes on all branches
+        alias kall="gitk --all &";
+
+        alias add="__add";
+        alias ignore="echo $* >> .gitignore";
+    }
+
+
+    git_dir
+
+    if [ -n "$vcs" ]; then
+        __vcs_prefix="($vcs)"
+        __vcs_base_dir="${base_dir/$HOME/~}"
+        __vcs_ref="[$ref]"
+        __vcs_sub_dir="${sub_dir}"
+        PS1='\[\033]0;\u@\h:\w\007\]\[${_bold}\]${__vcs_base_dir}\[${_normal}\]${__vcs_ref}\[${_bold}\]${__vcs_sub_dir}\[${_normal}\]\$ '
+    else
+        unalias st 2> /dev/null
+        unalias d 2> /dev/null
+        unalias up 2> /dev/null
+        unalias pull 2> /dev/null
+        unalias commit 2> /dev/null
+        unalias push 2> /dev/null
+        unalias revert 2> /dev/null
+        unalias status 2> /dev/null
+        unalias branch 2> /dev/null
+        unalias newbranch 2> /dev/null
+        unalias deletebranch 2> /dev/null
+        unalias list 2> /dev/null
+        unalias listall 2> /dev/null
+        unalias k 2> /dev/null
+        unalias kall 2> /dev/null
+        unalias d 2> /dev/null
+        unalias checkout 2> /dev/null
+        unalias s 2> /dev/null
+        unalias add 2> /dev/null
+        unalias a 2> /dev/null
+        unalias c 2> /dev/null
+        unalias diff 2> /dev/null
+
+        __vcs_prefix=''
+        __vcs_base_dir_temp=`basename "$PWD"`
+        if [ "$PWD" == "$HOME" ]; then
+            __vcs_base_dir="~"
+        else
+            __vcs_base_dir="`basename "$PWD"`"
+        fi
+        __vcs_ref=''
+        __vcs_sub_dir=''
+  fi
+}
+
+PROMPT_COMMAND=__vcs_dir
