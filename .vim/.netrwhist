@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/michael/Documents/Tumblr/config'
 let g:netrw_dirhist_2='/Users/michael/Documents/Tumblr'
 let g:netrw_dirhist_3='/Users/michael/Documents/Tumblr/puppet'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/Users/michael/Documents/Tumblr/puppet/environments'
 let g:netrw_dirhist_5='/Users/michael/Documents/Tumblr/puppet/environments/d2'
 let g:netrw_dirhist_6='/Users/michael/Documents/Tumblr/puppet/environments/d2/manifests'
 let g:netrw_dirhist_7='/Users/michael/Documents/Tumblr'
+let g:netrw_dirhist_8='/private/tmp'

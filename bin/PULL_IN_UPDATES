@@ -1,0 +1,3 @@
+
+rsync -auv ~/.vim* .
+rsync -auv ~/.git_profile .
