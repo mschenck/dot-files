@@ -1,3 +1,4 @@
 
 rsync -auv ~/.vim* .
 rsync -auv ~/.git_profile .
+rsync -auv ~/.bash_profile .
