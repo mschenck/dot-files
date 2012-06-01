@@ -8,7 +8,6 @@ set number
 colorscheme slate
 
 autocmd BufNewFile,BufRead *.json set ft=javascript
-filetype plugin indent on
 syntax on
 
 let g:snippets_dir="~/.vim/bundle/snipmate.vim/snippets"
