@@ -17,7 +17,6 @@ SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
 
 # GIT
 alias MT="git mergetool -y"
-. ~/.git_profile
 
 # Vim
 alias tmpvi='export SCRATCH_ID="$RANDOM"; vim "/tmp/scratch-$SCRATCH_ID"; echo "Saved [/tmp/scratch-$SCRATCH_ID]"'
