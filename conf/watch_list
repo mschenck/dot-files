@@ -1,4 +1,5 @@
 .vim*
 .git_profile
 .bash_profile
+.icons
 bin
