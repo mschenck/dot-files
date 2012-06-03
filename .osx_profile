@@ -1,0 +1,27 @@
+ICONS_DIR="$HOME/.icons"
+SHORTTERM_DIR="$HOME/Desktop/short-term"
+REZ="/usr/bin/Rez"
+
+SHORTDIR_BASE=$(basename $SHORTTERM_DIR)
+if [[ ! -d "${SHORTTERM_DIR}" ]]
+then
+  printf "Creating screen capture directory $SHORTTERM_DIR ... "
+  mkdir -p "$SHORTTERM_DIR"
+  
+  ICON_FILE="${ICONS_DIR}/${SHORTDIR_BASE}.png"
+  if [ -f "${ICON_FILE}" ]
+  then
+    printf "with icon ${ICON_FILE} ... "
+    xattr -w com.apple.metadata:kMDItemFinderComment "${ICON_FILE}" "${SHORTTERM_DIR}"
+    DeRez -only icns "${ICON_FILE}" "/tmp/${SHORTDIR_BASE}.rscs"
+    Rez -append "/tmp/${SHORTDIR_BASE}.rscs" "${SHORTTERM_DIR}/Icon"
+    SetFile -a C "${SHORTTERM_DIR}/Icon" "${SHORTTERM_DIR}"
+  fi
+  echo "done."
+fi
+if [ $(defaults read com.apple.screencapture location) != "{SHORTTERM_DIR}" ]
+then
+  defaults write com.apple.screencapture location "${SHORTTERM_DIR}"
+  killall SystemUIServer
+fi
+

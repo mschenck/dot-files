@@ -37,16 +37,4 @@ alias ssh="ssh -A -l mschenck"
 alias puptest="puppet apply --modulepath=`pwd` --noop $1"
 
 # OS X customizations
-SCREEN_CAP_DIR="$HOME/Desktop/short-term"
-if [[ ! -d "${SCREEN_CAP_DIR}" ]]
-then
-  printf "Creating screen capture directory [$SCREEN_CAP_DIR] ... "
-  mkdir -p "$SCREEN_CAP_DIR"
-  echo "done."
-fi
-if [ $(defaults read com.apple.screencapture location) != "{SCREEN_CAP_DIR}" ]
-then
-  defaults write com.apple.screencapture location "${SCREEN_CAP_DIR}"
-  killall SystemUIServer
-fi
-
+. ~/.osx_profile
