@@ -33,3 +33,5 @@ alias provisioner="/Users/michael/Documents/Tumblr/platform/collins/clients/prov
 # ssh-hack
 alias ssh="ssh -A -l mschenck"
 
+# Puppet
+alias puptest="puppet apply --modulepath=`pwd` --noop $1"
