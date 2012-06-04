@@ -2,23 +2,37 @@ ICONS_DIR="$HOME/.icons"
 SHORTTERM_DIR="$HOME/Desktop/short-term"
 REZ="/usr/bin/Rez"
 
+# Create SHORTTERM_DIR
 SHORTDIR_BASE=$(basename $SHORTTERM_DIR)
 if [[ ! -d "${SHORTTERM_DIR}" ]]
 then
   printf "Creating screen capture directory $SHORTTERM_DIR ... "
   mkdir -p "$SHORTTERM_DIR"
   
-  ICON_FILE="${ICONS_DIR}/${SHORTDIR_BASE}.png"
-  if [ -f "${ICON_FILE}" ]
+  ICON_ORIG="${ICONS_DIR}/${SHORTDIR_BASE}.png"
+  if [ -f "${ICON_ORIG}" ]
   then
-    printf "with icon ${ICON_FILE} ... "
+    printf "with icon ${ICON_ORIG} ... "
+    ORIG_EXT=$(echo "${ICON_ORIG}" |awk -F . '{print $NF}')
+    ICON_FILE="/tmp/${SHORTDIR_BASE}.${ORIG_EXT}"
+    cp "${ICON_ORIG}" "${ICON_FILE}"
+    sips -i "${ICON_FILE}" > /dev/null
     xattr -w com.apple.metadata:kMDItemFinderComment "${ICON_FILE}" "${SHORTTERM_DIR}"
-    DeRez -only icns "${ICON_FILE}" "/tmp/${SHORTDIR_BASE}.rscs"
-    Rez -append "/tmp/${SHORTDIR_BASE}.rscs" "${SHORTTERM_DIR}/Icon"
-    SetFile -a C "${SHORTTERM_DIR}/Icon" "${SHORTTERM_DIR}"
+
+    printf "DeRez ... "
+    DeRez -only icns "${ICON_FILE}" > "/tmp/${SHORTDIR_BASE}.rscs"
+
+    printf "Rez ... "
+    Rez -append "/tmp/${SHORTDIR_BASE}.rscs" -o `printf "${SHORTTERM_DIR}/Icon\r"`
+
+    printf "SetFile ... "
+    SetFile -a C "${SHORTTERM_DIR}/"
+    SetFile -a V `printf "${SHORTTERM_DIR}/Icon\r"`
   fi
   echo "done."
 fi
+
+# Set screen capture location to SHORTTERM_DIR
 if [ $(defaults read com.apple.screencapture location) != "{SHORTTERM_DIR}" ]
 then
   defaults write com.apple.screencapture location "${SHORTTERM_DIR}"
