@@ -20,6 +20,7 @@ alias MT="git mergetool -y"
 . ~/.git_profile
 
 # Vim
+mkdir -p ~/Dropbox/VimBackups
 alias tmpvi='export SCRATCH_ID="$RANDOM"; vim "/tmp/scratch-$SCRATCH_ID"; echo "Saved [/tmp/scratch-$SCRATCH_ID]"'
 alias vi="vim"
 alias v="vim"
