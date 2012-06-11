@@ -33,7 +33,7 @@ then
 fi
 
 # Set screen capture location to SHORTTERM_DIR
-if [ $(defaults read com.apple.screencapture location) != "{SHORTTERM_DIR}" ]
+if [ "$(defaults read com.apple.screencapture location)" != "{SHORTTERM_DIR}" ]
 then
   defaults write com.apple.screencapture location "${SHORTTERM_DIR}"
   killall SystemUIServer

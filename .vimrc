@@ -19,4 +19,4 @@ let NERDTreeShowBookmarks=1
 set backup 
 set backupdir=~/Dropbox/VimBackups 
 set directory=/tmp 
-set undodir=/tmp//  
+set undodir=/tmp
