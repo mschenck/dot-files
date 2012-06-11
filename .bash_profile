@@ -1,3 +1,7 @@
+# less (and more)
+LESS="-R"
+LESSCHARSET="utf-8"
+
 # Python
 export PATH="~/bin:/usr/local/scala/bin:/usr/local/bin:/usr/local/sbin:${AWS_IAM_HOME}/bin:$PATH"
 export PYTHONPATH="/opt/rrdtool-1.4.5/lib/python2.7/site-packages/"
