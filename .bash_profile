@@ -21,6 +21,7 @@ SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
 
 # GIT
 alias MT="git mergetool -y"
+alias gitk="/usr/bin/wish $(which gitk)"
 . ~/.git_profile
 
 # Vim
@@ -48,3 +49,4 @@ then
   . ~/.osx_profile
   echo "done."
 fi
+
