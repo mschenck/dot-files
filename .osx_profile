@@ -2,6 +2,12 @@ ICONS_DIR="$HOME/.icons"
 SHORTTERM_DIR="$HOME/Desktop/short-term"
 REZ="/usr/bin/Rez"
 
+# Add ctags for ShowFunc.vom
+if [ ! -f /usr/local/bin/ctags ]
+then
+  brew install ctags
+fi
+
 # Create SHORTTERM_DIR
 SHORTDIR_BASE=$(basename $SHORTTERM_DIR)
 if [[ ! -d "${SHORTTERM_DIR}" ]]
@@ -33,7 +39,7 @@ then
 fi
 
 # Set screen capture location to SHORTTERM_DIR
-if [ "$(defaults read com.apple.screencapture location)" != "{SHORTTERM_DIR}" ]
+if [ $(defaults read com.apple.screencapture location) != "{SHORTTERM_DIR}" ]
 then
   defaults write com.apple.screencapture location "${SHORTTERM_DIR}"
   killall SystemUIServer

@@ -15,6 +15,7 @@ autocmd BufNewFile,BufRead *.json set ft=javascript
 syntax on
 
 let g:snippets_dir="~/.vim/bundle/snipmate.vim/snippets"
+let g:showfuncctagsbin="/usr/local/bin/ctags"
 
 let NERDTreeShowBookmarks=1
 
@@ -22,3 +23,4 @@ set backup
 set backupdir=~/Dropbox/VimBackups 
 set directory=/tmp 
 set undodir=/tmp//  
+
