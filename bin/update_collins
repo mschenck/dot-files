@@ -1,4 +1,4 @@
 #!/bin/bash
 
-gem uninstall collins collins-util
-gem install --source=http://repo.tumblr.net:9929/ collins collins-util
+gem uninstall collins-util collins_shell collins
+gem install --source=http://10.80.97.195:9929/ collins_shell
