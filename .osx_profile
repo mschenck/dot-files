@@ -4,6 +4,7 @@ REZ="/usr/bin/Rez"
 
 alias ls="ls -G"
 alias FlushDns="sudo dscacheutil -flushcache"
+alias vihosts="sudo vi /etc/hosts && sudo dscacheutil -flushcache"
 
 # Add ctags for ShowFunc.vom
 if [ ! -f /usr/local/bin/ctags ]
