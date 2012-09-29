@@ -2,6 +2,9 @@ ICONS_DIR="$HOME/.icons"
 SHORTTERM_DIR="$HOME/Desktop/short-term"
 REZ="/usr/bin/Rez"
 
+alias ls="ls -G"
+alias FlushDns="sudo dscacheutil -flushcache"
+
 # Add ctags for ShowFunc.vom
 if [ ! -f /usr/local/bin/ctags ]
 then
