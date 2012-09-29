@@ -16,8 +16,8 @@ export AWS_CREDENTIAL_FILE="/Users/michael/.iamcfg"
 
 # Scala/Java
 export JAVA_HOME=`/usr/libexec/java_home`
+export PATH="/usr/local/scala/bin:$PATH"
 SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
-. ~/.bash_profile_scala
 
 # GIT
 alias MT="git mergetool -y"
