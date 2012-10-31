@@ -16,9 +16,16 @@ set number
 set nospell spelllang=en_us
 set expandtab
 
-" - syntax highlighting
+" syntax highlighting
 syntax on
 autocmd BufNewFile,BufRead *.json set ft=javascript
+
+" folding settings
+set foldmethod=syntax   "fold based on indent
+set foldnestmax=6       "deepest fold is 10 levels
+set foldlevel=2         "this is just what i use
+"""set nofoldenable        "dont fold by default
+
 
 " plugin settings
 let NERDTreeShowBookmarks=1
