@@ -11,7 +11,7 @@ set softtabstop=2
 set tabstop=2
 
 " display settings
-colorscheme slate
+colorscheme jellybeans
 set number
 set nospell spelllang=en_us
 set expandtab
