@@ -6,6 +6,11 @@ REZ="/usr/bin/Rez"
 [[ -s "/Users/michael/.rvm/scripts/rvm" ]] && source "/Users/michael/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 rvm use 1.9.2
 
+# Scala/Java
+export JAVA_HOME=`/usr/libexec/java_home`
+export PATH="/usr/local/scala/bin:$PATH"
+SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
+
 alias ls="ls -G"
 alias FlushDns="sudo dscacheutil -flushcache"
 alias vihosts="sudo vi /etc/hosts && sudo dscacheutil -flushcache"

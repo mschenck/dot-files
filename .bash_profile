@@ -10,11 +10,6 @@ export PYTHONPATH="/opt/rrdtool-1.4.5/lib/python2.7/site-packages/"
 export AWS_IAM_HOME='/Users/michael/IAMCli-1.3.0'
 export AWS_CREDENTIAL_FILE="/Users/michael/.iamcfg"
 
-# Scala/Java
-export JAVA_HOME=`/usr/libexec/java_home`
-export PATH="/usr/local/scala/bin:$PATH"
-SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"
-
 # GIT
 alias MT="git mergetool -y"
 alias gitk="/usr/bin/wish $(which gitk)"
