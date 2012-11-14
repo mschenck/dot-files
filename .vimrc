@@ -34,7 +34,16 @@ let g:showfuncctagsbin="/usr/local/bin/ctags"
 
 " backup/recovery
 set backup 
-set backupdir=~/Dropbox/VimBackups 
 set directory=/tmp 
-set undodir=/tmp//  
 
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Darwin"
+  set backupdir=~/Dropbox/VimBackups 
+elseif os == "Linux"
+  set backupdir=~/VimBackups 
+endif
+
+
+if version >= 703
+  set undodir=/tmp
+endif

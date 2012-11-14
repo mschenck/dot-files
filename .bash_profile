@@ -42,11 +42,14 @@ alias ssh="ssh -A -l mschenck"
 # Puppet
 alias puptest="puppet apply --modulepath=`pwd` --noop $1"
 
-# OS X customizations
-if [ $(uname -s) == "Darwin" ]
+# OS-specific
+OS=$(uname -s)
+if [ $OS == "Darwin" ]
 then
-  printf "OS X customizations loading ... "
+  echo "OS X customizations loading ... "
   . ~/.osx_profile
-  echo "done."
+elif [ $OS == "Linux" ]
+  echo "OS X customizations loading ... "
+  . ~/.linux_profile
 fi
 
