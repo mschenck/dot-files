@@ -6,10 +6,6 @@ LESSCHARSET="utf-8"
 export PATH="~/bin:/usr/local/scala/bin:/usr/local/bin:/usr/local/sbin:${AWS_IAM_HOME}/bin:$PATH"
 export PYTHONPATH="/opt/rrdtool-1.4.5/lib/python2.7/site-packages/"
 
-# Ruby
-[[ -s "/Users/michael/.rvm/scripts/rvm" ]] && source "/Users/michael/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-rvm use 1.9.2
-
 # AWS
 export AWS_IAM_HOME='/Users/michael/IAMCli-1.3.0'
 export AWS_CREDENTIAL_FILE="/Users/michael/.iamcfg"
