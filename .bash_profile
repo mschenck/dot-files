@@ -21,11 +21,8 @@ alias tmpvi='export SCRATCH_ID="$RANDOM"; vim "/tmp/scratch-$SCRATCH_ID"; echo "
 alias vi="vim"
 alias v="vim"
 
-# Tumblr
-alias T="cd ~/Documents/Tumblr"
-alias collins-d2="/Users/michael/.rvm/gems/ruby-1.9.2-p290/bin/collins -c /Users/michael/.collins/d2.yaml"
-alias collins-ewr01="/Users/michael/.rvm/gems/ruby-1.9.2-p290/bin/collins -c /Users/michael/.collins/ewr01.yaml"
-alias provisioner="/Users/michael/Documents/Tumblr/platform/collins/clients/provisioner/bin/provisioner -c /Users/michael/.collins/provisioner.yaml --notify='michael@tumblr.com' "
+# Work-specific settings
+. ~/.work_profile
 
 # ssh-hack
 alias ssh="ssh -A -l mschenck"
