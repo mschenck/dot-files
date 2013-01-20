@@ -12,6 +12,8 @@ set tabstop=2
 
 " display settings
 colorscheme ir_black
+set cursorline
+highlight Cursorline cterm=bold
 set number
 set nospell spelllang=en_us
 set expandtab
