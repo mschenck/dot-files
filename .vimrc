@@ -38,10 +38,10 @@ let g:showfuncctagsbin="/usr/local/bin/ctags"
 set backup 
 set directory=/tmp 
 
-let os = substitute(system('uname'), "\n", "", "")
-if os == "Darwin"
+let s:os = system('uname')
+if s:os == "Darwin\n"
   set backupdir=~/Dropbox/VimBackups 
-elseif os == "Linux"
+elseif s:os == "Linux\n"
   set backupdir=~/VimBackups 
 endif
 
