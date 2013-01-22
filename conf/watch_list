@@ -5,3 +5,4 @@
 bin
 .osx_profile
 .linux_profile
+.tmux.conf
