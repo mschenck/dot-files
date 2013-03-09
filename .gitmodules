@@ -1,0 +1,3 @@
+[submodule "environment/iTerm-colors"]
+	path = environment/iTerm-colors
+	url = https://github.com/hardcore/iTerm-colors.git
