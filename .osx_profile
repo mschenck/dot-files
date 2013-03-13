@@ -3,9 +3,13 @@ SHORTTERM_DIR="$HOME/Desktop/short-term"
 REZ="/usr/bin/Rez"
 
 # Ruby
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "/Users/michael/.rvm/scripts/rvm" ]] && source "/Users/michael/.rvm/scripts/rvm"  # This loads RVM into a shell session.
-rvm use 1.9.2
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export RBENV_ROOT=/usr/local/opt/rbenv
+eval "$(rbenv init -)"
+
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#[[ -s "/Users/michael/.rvm/scripts/rvm" ]] && source "/Users/michael/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+#rvm use 1.9.2
 
 # Scala/Java
 export JAVA_HOME=`/usr/libexec/java_home`
