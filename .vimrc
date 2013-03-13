@@ -11,7 +11,7 @@ set softtabstop=2
 set tabstop=2
 
 " display settings
-colorscheme ir_black
+colorscheme rdark
 set cursorline
 highlight Cursorline cterm=bold
 set number
