@@ -1,3 +1,6 @@
-[submodule "environment/iTerm-colors"]
-	path = environment/iTerm-colors
+[submodule "environment/iTerm-colors.git"]
+	path = environment/iTerm-colors.git
 	url = https://github.com/hardcore/iTerm-colors.git
+[submodule "environment/vim-colorschemes.git"]
+	path = environment/vim-colorschemes.git
+	url = https://github.com/flazz/vim-colorschemes.git
