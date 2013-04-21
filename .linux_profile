@@ -3,3 +3,7 @@ if [ ! -d ~/VimBackups ]
 then
   mkdir ~/VimBackups
 fi
+
+alias ls="ls --color=auto "
+
+export PATH="$PATH:/home/mschenck/depot_tools"
