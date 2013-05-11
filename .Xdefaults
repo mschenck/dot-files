@@ -2,7 +2,7 @@ xterm*loginshell: true
 xterm*:dynamicColors:  true
 
 xterm*faceName: DejaVu Sans Mono Book
-xterm*faceSize: 12
+xterm*faceSize: 11
 
 xterm*background:  rgb:00/00/00
 xterm*foreground:  rgb:f0/f0/f0

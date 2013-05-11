@@ -10,17 +10,11 @@ set rulerformat=%55(%{strftime('%a\ %b\ %e\ %I:%M\ %p')}\ %5l,%-6(%c%V%)\ %P%)
 set softtabstop=2
 set tabstop=2
 
-" display settings
-colorscheme rdark
-set cursorline
-highlight Cursorline cterm=bold
-set number
-set nospell spelllang=en_us
-set expandtab
-
 " syntax highlighting
 syntax on
 autocmd BufNewFile,BufRead *.json set ft=javascript
+" replace tab chars with >---
+set listchars=tab:>-
 
 " folding settings
 set foldmethod=syntax   "fold based on indent
@@ -33,6 +27,16 @@ set foldlevel=2         "this is just what i use
 let NERDTreeShowBookmarks=1
 let g:snippets_dir="~/.vim/bundle/snipmate.vim/snippets"
 let g:showfuncctagsbin="/usr/local/bin/ctags"
+
+
+" display settings
+colorscheme relaxedgreen
+set number
+set nospell spelllang=en_us
+set expandtab
+set cursorline 
+highlight CursorLine cterm=bold gui=bold ctermbg=lightgrey ctermfg=black guifg=black guibg=white 
+
 
 " backup/recovery
 set backup 
