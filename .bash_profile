@@ -22,7 +22,8 @@ alias vi="vim"
 alias v="vim"
 
 # Work-specific settings
-. ~/.work_profile
+#. ~/.work_profile
+. ~/.go_profile
 
 # ssh-hack
 alias ssh="ssh -A -l mschenck"
@@ -38,7 +39,8 @@ case $(uname -s) in
     ;;
   "Linux" )
     echo "Linux customizations loading ... "
-    . ~/.linux_profile
+#    . ~/.linux_profile
     ;;
 esac
 
+export PS1="\u@\h \W# "

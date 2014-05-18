@@ -1,0 +1,8 @@
+if [ ! -d $HOME/go ]
+then
+  mkdir $HOME/go
+fi
+
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
